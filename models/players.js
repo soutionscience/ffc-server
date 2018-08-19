@@ -10,7 +10,8 @@ let player = new Schema({
     teamName: String,
     poinsTotal: Number,
     pointsWeek: Number,
-    address: String
+    address: String,
+    team_code: Number
 
 })
 

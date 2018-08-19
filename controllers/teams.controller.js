@@ -9,7 +9,9 @@ exports.post =(req, res, next)=>{
 }
 
 exports.get = (req, res, next)=>{
-    console.log("hitting get")
+    //console.log("hitting get")
+    //console.log(req.query.name);
+
     Team.find({})
     .exec(function(err, resp){
         if(err) throw err;

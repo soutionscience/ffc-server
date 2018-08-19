@@ -41,7 +41,8 @@ exports.makeRequest =()=>{
                           "second_name": element[i].second_name,
                            "squad_number": element[i].squad_number,
                            "now_costs": element[i].now_costs,
-                             "team": element[i].team }
+                             "team": element[i].team,
+                            "team_code": element[i].team_code }
         let newPlayer = new Player(playerData)
         newPlayer.save(function(err, resp){
             if(err) throw err;
