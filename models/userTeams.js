@@ -16,4 +16,11 @@ let player = new Schema({
 })
 
 
-module.exports = mongoose.model('player', player)
+
+let userTeam = new Schema({
+    name: String,
+    players: [player]
+})
+
+
+module.exports = mongoose.model('userTeam', userTeam)

@@ -15,6 +15,7 @@ let Team = new Schema({
 
 let User = new Schema({
     username: String,
+    balance: String,
     address: String,
     OauthId: String,
     OauthToken: String,

@@ -6,10 +6,11 @@ var logger = require('morgan');
 
 
 
-var indexRouter = require('./routes/index');
+let indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users.routes');
 let playersRouter = require('./routes/player.routes')
-let teamRouter = require('./routes/team.routes')
+let teamRouter = require('./routes/team.routes');
+let userTeamRouter = require('./routes/users.team.routes');
 let cors = require('cors')
 
 
@@ -35,11 +36,12 @@ app.use('/', indexRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/players', playersRouter)
 app.use('/api/teams', teamRouter)
+app.use('/api/user-teams', userTeamRouter)
 
 
 //conect mongoose
 
-mongoose.connect(process.env.remoteDb,  { useNewUrlParser: true }, function(err, db){
+mongoose.connect(process.env.localDb,  { useNewUrlParser: true }, function(err, db){
   if(err) throw err
   console.log("connected to remote db");
   database=db
@@ -47,7 +49,7 @@ mongoose.connect(process.env.remoteDb,  { useNewUrlParser: true }, function(err,
 })
 
 //make api request
- //getData.makeRequest();
+//getData.makeRequest();
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

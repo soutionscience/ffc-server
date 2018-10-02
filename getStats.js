@@ -40,7 +40,9 @@ exports.makeRequest =()=>{
                          "first_name": element[i].first_name,
                           "second_name": element[i].second_name,
                            "squad_number": element[i].squad_number,
-                           "now_costs": element[i].now_costs,
+                           "now_cost": element[i].now_cost,
+                           "pointsTotal":element[i].total_points,
+                           "pointsWeek": element[i].event_points,
                              "team": element[i].team,
                             "team_code": element[i].team_code }
         let newPlayer = new Player(playerData)
