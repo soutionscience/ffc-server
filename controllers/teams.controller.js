@@ -1,6 +1,7 @@
 let Team = require('../models/teams');
 
 exports.post =(req, res, next)=>{
+    console.log("hitting post")
     let newTeam = new Team(req.body);
     newTeam.save(function(err, resp){
         if(err) throw err;
