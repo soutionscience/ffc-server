@@ -5,9 +5,16 @@ let controller = require('../controllers/users.controller')
 /* GET users listing. */
 router.route('/')
 .get(controller.get)
+.delete(controller.delete)
+
+// register new user
+router.route('/register')
 .post(controller.post)
 
-router.route('/:id')
+router.route('/login')
+.post(controller.login)
+
+router.route('/:id/players')
 .post(controller.postTeam)
 
 

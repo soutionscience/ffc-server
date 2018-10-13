@@ -16,6 +16,13 @@ exports.get = function(req, res, next){
         if(err) throw err;
         res.json(resp)
     })
+    // userTeam.find({})
+    // .populate('players')
+    // .exec(function(err, resp){
+    //     if(err) throw err;
+    //     res.status(200).json(resp)
+
+    // })
 }
 
 exports.delete = function(req, res, next){
@@ -24,5 +31,23 @@ exports.delete = function(req, res, next){
     .exec(function(err, resp){
         if(err) throw err
         res.status(200).send("deleted all")
+    })
+}
+
+exports.postTeam = function(req, res, next){
+    userTeam.findById(req.params.id, function(err, resp){
+        if(err) throw err;
+        //go through each player from req.body add it to players and save
+        
+        req.body.forEach(element => {
+            resp.players.push(element);
+            
+        });
+        
+
+        resp.save((err, resp)=>{
+            if(err) throw err;
+            res.status(201).send("added team to user")
+        })
     })
 }

@@ -11,16 +11,29 @@ var usersRouter = require('./routes/users.routes');
 let playersRouter = require('./routes/player.routes')
 let teamRouter = require('./routes/team.routes');
 let userTeamRouter = require('./routes/users.team.routes');
-let cors = require('cors')
+let cors = require('cors');
+let passport = require('passport')
+let User = require('./models/users')
 
 
 let mongoose = require('mongoose')
-require('dotenv').config();
+
 let request = require('request')
 let getData = require('./getStats')
 
 var app = express();
 app.use(cors())
+
+
+//passport stuff
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
+require('dotenv').config();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

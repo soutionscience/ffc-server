@@ -8,4 +8,7 @@ router.route('/')
 .get(controller.get)
 .delete(controller.delete)
 
+router.route('/:id/players')
+.post(controller.postTeam)
+
 module.exports = router;

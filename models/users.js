@@ -1,19 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const objectId = Schema.objectId;
-let playerSchema = require('./players')
+const passportLocalMongoose = require('passport-local-mongoose')
 
-
-let Team = new Schema({
-    players:[{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'player'
-    }]
-})
-
-
-
-let User = new Schema({
+let user = new Schema({
     username: String,
     balance: String,
     address: String,
@@ -24,8 +13,11 @@ let User = new Schema({
         type: Boolean,
         default: false
     },
-    teams: [Team]
-});
+    players:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'player'
+    }]
+})
 
-
-module.exports = mongoose.model('user', User)
+user.plugin(passportLocalMongoose)
+module.exports = mongoose.model('user', user)
