@@ -9,9 +9,11 @@ passport.deserializeUser(User.deserializeUser());
 
 
 exports.post =(req, res, next)=>{
+    
   User.register(new User({username: req.body.username}),
   req.body.password, function(err, user){
       if(err){
+          console.log("what is in error ", err)
           return res.status(500).json({err:err})
       }if(req.body.address){
           user.address = req.body.address;
@@ -20,7 +22,7 @@ exports.post =(req, res, next)=>{
       user.save((err, resp)=>{
           if(err) throw err;
           passport.authenticate('local')(req, res, function(){
-              return res.status(200).json({status: 'Registration Successful'})
+              return res.status(200).json(resp)
           })
       })
   })
@@ -49,11 +51,11 @@ exports.login = (req, res, next)=>{
 }
 
 exports.get = (req, res, next)=>{
-    console.log("hitting get")
     User.find({}, function(err, resp){
         if(err) throw err;
         res.json(resp)
     })
+
     // User.find({})
     // .populate('players')
     // .exec(function(err, resp){
@@ -81,7 +83,17 @@ exports.postTeam = (req, res, next)=>{
         });
         resp.save((err, resp)=>{
             if(err) throw err;
-            res.status(201).send("added team to user")
+            res.status(201).json(resp)
         })
     })
+}
+
+exports.getUser = (req, res, next)=>{
+   User.findById(req.params.id)
+    .populate('players')
+    .exec((err, resp)=>{
+        if(err) throw err;
+        res.status(200).json(resp)
+    })
+
 }

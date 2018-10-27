@@ -31,7 +31,7 @@ exports.makeRequest =()=>{
    // console.log(playerData)
 
     const element = myresp.elements //get player info
-    Player.deleteMany({})
+    Player.deleteMany({}) //delete all players
     .exec(function(err, resp){
         if(err) throw err;
     })
@@ -40,10 +40,11 @@ exports.makeRequest =()=>{
                          "first_name": element[i].first_name,
                           "second_name": element[i].second_name,
                            "squad_number": element[i].squad_number,
+                           "player_code": element[i].code,
                            "now_cost": element[i].now_cost,
                            "pointsTotal":element[i].total_points,
                            "pointsWeek": element[i].event_points,
-                             "team": element[i].team,
+                            "team": element[i].team,
                             "team_code": element[i].team_code }
         let newPlayer = new Player(playerData)
         newPlayer.save(function(err, resp){
