@@ -9,6 +9,7 @@ let player = new Schema({
     squad_number: Number,
     previous_cost: Number,
     now_cost: Number,
+    change: Number,
     base_cost: Number,
     teamName: String,
     pointsTotal: Number,
@@ -17,6 +18,9 @@ let player = new Schema({
     team_code: Number
 
 })
+player.methods.getChange = ()=>{
+    return now_cost-previous_cost
+}
 
 
 module.exports = mongoose.model('player', player)
