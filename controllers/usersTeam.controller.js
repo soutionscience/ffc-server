@@ -1,5 +1,5 @@
 let userTeam = require('../models/userTeams')
-
+// i dont think its working
 
 exports.post = function(req, res, next){
     console.log("hitting post ", req.body)
@@ -35,15 +35,16 @@ exports.delete = function(req, res, next){
 }
 
 exports.postTeam = function(req, res, next){
+  console.log('is it this one?')
     userTeam.findById(req.params.id, function(err, resp){
         if(err) throw err;
         //go through each player from req.body add it to players and save
-        
+
         req.body.forEach(element => {
             resp.players.push(element);
-            
+
         });
-        
+
 
         resp.save((err, resp)=>{
             if(err) throw err;

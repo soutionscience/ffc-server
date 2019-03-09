@@ -4,7 +4,7 @@ exports.post =(req, res, next)=>{
     let newPlayer = new Player(req.body);
     newPlayer.save(function(err, resp){
         if(err) throw err;
-        res.status(201).send('new player saved betty')
+        res.status(201).send('new player saved')
     })
 }
 

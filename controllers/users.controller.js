@@ -7,9 +7,11 @@ var local= passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+// this controller registers new users, display users and post user's team to server
+
 
 exports.post =(req, res, next)=>{
-    
+
   User.register(new User({username: req.body.username}),
   req.body.password, function(err, user){
       if(err){
@@ -63,7 +65,7 @@ exports.get = (req, res, next)=>{
     //     res.status(200).json(resp)
 
     // })
-   
+
 }
 exports.delete =(req, res, next)=>{
     User.deleteMany({})
@@ -74,12 +76,13 @@ exports.delete =(req, res, next)=>{
 }
 
 exports.postTeam = (req, res, next)=>{
+    console.log('is it this two?')
    User.findById(req.params.id, function(err, resp){
         if(err) throw err;
         //go through each player from req.body add it to players and save
         req.body.forEach(element => {
             resp.players.push(element);
-            
+
         });
         resp.save((err, resp)=>{
             if(err) throw err;

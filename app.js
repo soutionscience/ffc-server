@@ -11,9 +11,11 @@ var usersRouter = require('./routes/users.routes');
 let playersRouter = require('./routes/player.routes')
 let teamRouter = require('./routes/team.routes');
 let userTeamRouter = require('./routes/users.team.routes');
+let leagueRouter = require('./routes/league.routes')
 let cors = require('cors');
 let passport = require('passport')
 let User = require('./models/users');
+
 
 
 
@@ -22,6 +24,7 @@ let mongoose = require('mongoose')
 let request = require('request')
 let getData = require('./getStats')
 let getValues = require('./getNewValues')
+let newValues = require('./newValues')
 
 var app = express();
 app.use(cors())
@@ -52,6 +55,7 @@ app.use('/api/users', usersRouter);
 app.use('/api/players', playersRouter)
 app.use('/api/teams', teamRouter)
 app.use('/api/user-teams', userTeamRouter)
+app.use('/api/leagues', leagueRouter)
 
 
 //conect mongoose
@@ -66,6 +70,7 @@ mongoose.connect(process.env.localDb,  { useNewUrlParser: true }, function(err, 
 //make api request
 //getData.makeRequest();  //get new player data
 //getValues.getNew()
+//newValues.getnew();
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
