@@ -22,9 +22,9 @@ let User = require('./models/users');
 let mongoose = require('mongoose')
 
 let request = require('request')
-let getData = require('./getStats')
-let getValues = require('./getNewValues')
-let newValues = require('./newValues')
+let getData = require('./scripts/getStats')
+let getValues = require('./scripts/getNewValues')
+let newValues = require('./scripts/newValues')
 
 var app = express();
 app.use(cors())
@@ -68,7 +68,7 @@ mongoose.connect(process.env.localDb,  { useNewUrlParser: true }, function(err, 
 })
 
 //make api request
-//getData.makeRequest();  //get new player data
+getData.makeRequest();  //get new player data
 //getValues.getNew()
 //newValues.getnew();
 // catch 404 and forward to error handler

@@ -15,7 +15,9 @@ let player = new Schema({
     pointsTotal: Number,
     pointsWeek: Number,
     address: String,
-    team_code: Number
+    team_code: Number,
+    position: Number
+
 
 })
 player.methods.getChange = ()=>{

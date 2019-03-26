@@ -1,7 +1,7 @@
 const request = require('request');
-let Player = require('./models/players');
-let Team = require('./models/teams');
-let playerController = require('./controllers/players.contoller')
+let Player = require('../models/players');
+let Team = require('../models/teams');
+let playerController = require('../controllers/players.contoller')
 
 
 // function getMyStarts(){
@@ -45,7 +45,8 @@ exports.makeRequest =()=>{
                            "pointsTotal":element[i].total_points,
                            "pointsWeek": element[i].event_points,
                             "team": element[i].team,
-                            "team_code": element[i].team_code }
+                            "team_code": element[i].team_code,
+                             "position": element[i].element_type }
         let newPlayer = new Player(playerData)
         newPlayer.save(function(err, resp){
             if(err) throw err;

@@ -1,6 +1,6 @@
 const request = require('request')
-const Player = require('./models/players');
-const value = require('./models/values');
+const Player = require('../models/players');
+const value = require('../models/values');
 exports.getNew = ()=>{
     console.log("get values")
     request('https://fantasy.premierleague.com/drf/bootstrap-static', (error, response, body)=>{
