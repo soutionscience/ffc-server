@@ -3,6 +3,9 @@ const Player = require('../models/players');
 const url = 'https://fantasy.premierleague.com/drf/bootstrap-static';
 
 
+//checks if players cost have changed and updates
+
+
 exports.getnew= ()=>{
     console.log("new get")
     request(url, (error, response, body)=>{

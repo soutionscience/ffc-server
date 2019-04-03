@@ -4,6 +4,8 @@ let Team = require('../models/teams');
 let playerController = require('../controllers/players.contoller')
 
 
+// starts with fresh player and team DB
+
 // function getMyStarts(){
 
 //     let myResp =[] 
@@ -34,6 +36,7 @@ exports.makeRequest =()=>{
     Player.deleteMany({}) //delete all players
     .exec(function(err, resp){
         if(err) throw err;
+        console.log('deleted all players')
     })
     for(let i=0; i< element.length; i++){
         let playerData= {"web_name": element[i].web_name,
@@ -46,7 +49,7 @@ exports.makeRequest =()=>{
                            "pointsWeek": element[i].event_points,
                             "team": element[i].team,
                             "team_code": element[i].team_code,
-                             "position": element[i].element_type }
+                             "position": element[i].element_type}
         let newPlayer = new Player(playerData)
         newPlayer.save(function(err, resp){
             if(err) throw err;

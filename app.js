@@ -15,6 +15,7 @@ let leagueRouter = require('./routes/league.routes')
 let cors = require('cors');
 let passport = require('passport')
 let User = require('./models/users');
+let auth = require('./routes/auth')
 
 
 
@@ -50,12 +51,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// const MetaAuth = require('meta-auth');
+// const metaAuth = MetaAuth();
+
 app.use('/', indexRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/players', playersRouter)
 app.use('/api/teams', teamRouter)
 app.use('/api/user-teams', userTeamRouter)
 app.use('/api/leagues', leagueRouter)
+app.use('/api/auth', auth)
 
 
 //conect mongoose
@@ -68,7 +73,7 @@ mongoose.connect(process.env.localDb,  { useNewUrlParser: true }, function(err, 
 })
 
 //make api request
-getData.makeRequest();  //get new player data
+// getData.makeRequest();  //get new player data
 //getValues.getNew()
 //newValues.getnew();
 // catch 404 and forward to error handler

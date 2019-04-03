@@ -1,6 +1,8 @@
 const request = require('request')
 const Player = require('../models/players');
 const value = require('../models/values');
+
+// gets this week's points and player values
 exports.getNew = ()=>{
     console.log("get values")
     request('https://fantasy.premierleague.com/drf/bootstrap-static', (error, response, body)=>{

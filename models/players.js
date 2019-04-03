@@ -18,7 +18,6 @@ let player = new Schema({
     team_code: Number,
     position: Number
 
-
 })
 player.methods.getChange = ()=>{
     return now_cost-previous_cost
