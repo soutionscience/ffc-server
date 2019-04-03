@@ -1,11 +1,18 @@
 const MetaAuth = require('meta-auth');
-const metaAuth = MetaAuth()
+const metaAuth = new MetaAuth({
+  signature: 'MetaSignature',
+  message: 'MetaMessage',
+  address: 'MetaAddress',
+  banner: 'Example Site Banner',
+  challenge: 'please read this'
+});
 
   
-// exports.get = (metaAuth, (req, res, next)=>{
+// exports.get = ( (req, res, next)=>{
+ 
 //     console.log('hitting auth')
-//     console.log('what is', req.metaAuth.challenge)
-//      res.send({"challenge":req.metaAuth.challenge})
+//     console.log('what is', metaAuth.challenge)
+//      res.send({"challenge":metaAuth.challenge})
 
 //   })
 

@@ -11,23 +11,15 @@ passport.deserializeUser(User.deserializeUser());
 
 
 exports.post =(req, res, next)=>{
+  console.log('hitting user post');
+ let newUser= new User(req.body)
+ newUser.save((err, resp)=>{
+     if(err) throw err;
+     setTimeout((function() {res.status(200).json(resp)}), 2000);
+     
+ })
 
-  User.register(new User({username: req.body.username}),
-  req.body.password, function(err, user){
-      if(err){
-          console.log("what is in error ", err)
-          return res.status(500).json({err:err})
-      }if(req.body.address){
-          user.address = req.body.address;
-
-      }
-      user.save((err, resp)=>{
-          if(err) throw err;
-          passport.authenticate('local')(req, res, function(){
-              return res.status(200).json(resp)
-          })
-      })
-  })
+  
 }
 
 exports.login = (req, res, next)=>{

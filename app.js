@@ -51,8 +51,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-const MetaAuth = require('meta-auth');
-const metaAuth = MetaAuth();
+// const MetaAuth = require('meta-auth');
+// const metaAuth = MetaAuth();
 
 app.use('/', indexRouter);
 app.use('/api/users', usersRouter);
