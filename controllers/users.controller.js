@@ -84,11 +84,14 @@ exports.postTeam = (req, res, next)=>{
 }
 
 exports.getUser = (req, res, next)=>{
-   User.findById(req.params.id)
-    .populate('players')
-    .exec((err, resp)=>{
-        if(err) throw err;
-        res.status(200).json(resp)
+    console.log('get single user', req.params.id);
+    let address
+    User.find({address: req.params.id}, function(err, resp){
+        if(err) {throw err;}
+        else{
+        res.json(resp)
+
+        }
     })
 
 }
