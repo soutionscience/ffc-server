@@ -2,10 +2,7 @@ let jwt = require('jsonwebtoken');
 
 
 exports.getToken = (user)=>{
-    // console.log('sending user', user)
-    // console.log('secrete key ', process.env.secretKey)
-
-    return jwt.sign(user, process.env.secretKey, {
+return jwt.sign(user, process.env.secretKey, {
         expiresIn: 360000
     })
    

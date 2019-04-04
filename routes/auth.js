@@ -17,39 +17,16 @@ router.get('/:MetaAddress', metaAuth, (req, res) => {
     // Request a message from the server
     userAddress = req.params.MetaAddress
 
-    res.send({"challenge": req.metaAuth.challenge})
+    res.send(req.metaAuth.challenge)
   });
 
-router.get('/:MetaMessage/:MetaSignature', metaAuth, (req, res) => {
-    console.log('hitting new 2')
-    console.log('recoverd', req.metaAuth.recovered)
+router.get('/auth/:MetaMessage/:MetaSignature', metaAuth, (req, res)=> {
     let token
     let user
-    if (!req.metaAuth.recovered) {
-      // Signature matches the cache address/challenge
-      // Authentication is valid, assign JWT, etc.
-      console.log('user address ', userAddress)
-       User.find({address: userAddress}, (err, resp)=>{
-        if(err) throw err;
-        user=resp[0];
-        console.log('finding user ', user)
-  
-        token = verify.getToken(user)
-        console.log('token ', token)
-        res.status(200).json({
-          status: 'Login successful!',
-          success: true,
-          token: token
-        });
-      })
-      
-      
-    } else {
-      // Sig did not match, invalid authentication
-      console.log('error is here')
-      res.status(500).send();
-    };
-  });
+    console.log('hitting new 2')
+    // console.log(req.metaAuth.recovered)
+    res.status(200).send({'test': 'me'})
+});
 
 module.exports= router
 
