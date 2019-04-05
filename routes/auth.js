@@ -48,7 +48,13 @@ router.get('/:id/:MetaSignature/:nonce', metaAuth, (req, res)=> {
       const address = ethUtil.bufferToHex(addressBuffer)
       if (address.toLowerCase() === publicAddress.toLowerCase()) {
         console.log('verification passed!!')
-        return user;
+        token = verify.getToken(user)
+        console.log('token ', token)
+        res.status(200).json({
+          status: 'Login successful!',
+          success: true,
+          token: token
+        });
       } else {
         console.log('verification failed')
         return res
