@@ -85,14 +85,17 @@ exports.postTeam = (req, res, next)=>{
 
 exports.getUser = (req, res, next)=>{
     console.log('get single user', req.params.id);
-    let address
-    User.find({address: req.params.id}, (err, resp)=>{
-        if(resp) {
-            console.log('not found')
-            res.status(304).send({"error": "notfound"})
+    let myAddress = req.params.id
+    let query = {address: myAddress}
+    User.findOne(query, (err, resp)=>{
+        if(!resp) {
+         
+           return res.status(400).send({
+                error: 'User not found'
+             });
         }
         else{
-            console.log('found')
+            
         res.status(200).json(resp)
 
         }

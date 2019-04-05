@@ -1,6 +1,7 @@
 let  express = require('express');
 let router = express.Router();
 let User = require('../models/users')
+let ethUtil = require( 'ethereumjs-util');
 let controller = require('../controllers/auth.controller');
 const MetaAuth = require('meta-auth');
 const metaAuth = new MetaAuth({
@@ -20,12 +21,50 @@ router.get('/:MetaAddress', metaAuth, (req, res) => {
     res.send(req.metaAuth.challenge)
   });
 
-router.get('/auth/:MetaMessage/:MetaSignature', metaAuth, (req, res)=> {
+router.get('/:id/:MetaSignature/:nonce', metaAuth, (req, res)=> {
     let token
     let user
-    console.log('hitting new 2')
-    // console.log(req.metaAuth.recovered)
-    res.status(200).send({'test': 'me'})
+    console.log('hitting 2')
+    let publicAddress = req.params.id
+    let signature = req.params.MetaSignature
+    nonce = req.params.nonce
+   
+    let query = {address: publicAddress}
+    User.findOne(query, (err, user)=>{
+      const msg = `I am signing my one-time nonce: ${nonce}`;
+      console.log(msg)
+      const msgBuffer = ethUtil.toBuffer(msg);
+      const msgHash = ethUtil.hashPersonalMessage(msgBuffer);
+      const signatureBuffer = ethUtil.toBuffer(signature);
+      const signatureParams = ethUtil.fromRpcSig(signatureBuffer);
+
+      const publicKey = ethUtil.ecrecover(
+        msgHash,
+        signatureParams.v,
+        signatureParams.r,
+        signatureParams.s
+      );
+      const addressBuffer = ethUtil.publicToAddress(publicKey);
+      const address = ethUtil.bufferToHex(addressBuffer)
+      if (address.toLowerCase() === publicAddress.toLowerCase()) {
+        console.log('verification passed!!')
+        return user;
+      } else {
+        console.log('verification failed')
+        return res
+          .status(401)
+          .send({ error: 'Signature verification failed' });
+      }
+
+    })
+  
+
+    // The signature verification is successful if the address found with
+    // ecrecover matches the initial publicAddress
+  
+
+
+     
 });
 
 module.exports= router
