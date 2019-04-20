@@ -15,6 +15,7 @@ exports.get = (req, res, next)=>{
 
     Team.find({})
     .exec(function(err, resp){
+        console.log('teams controller')
         if(err) throw err;
         res.status(200).json(resp)
 

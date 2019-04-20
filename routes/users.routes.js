@@ -1,10 +1,11 @@
 var express = require('express');
 var router = express.Router();
-let controller = require('../controllers/users.controller')
+let controller = require('../controllers/users.controller');
+let verify = require('./verify')
 
 /* GET users listing. */
 router.route('/')
-.get(controller.get)
+.get( verify.verifyOrdinaryUser, controller.get)
 .delete(controller.delete)
 .post(controller.post)
 

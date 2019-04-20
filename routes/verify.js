@@ -16,7 +16,7 @@ exports.verifyOrdinaryUser = (req, resp, next)=>{
         jwt.verify(token, process.env.secretKey, (err, decoded)=>{
             if(err){
                 let err = new Error('You are not authenticated');
-                err.status(401)
+               // err.status(401)
                 return next(err)
             }else{
                 req.decoded = decoded;
@@ -27,7 +27,7 @@ exports.verifyOrdinaryUser = (req, resp, next)=>{
 
     }else{
         let err = new Error('No token provided');
-        err.status(403);
+        // err.status(403);
         return next(err)
     }
 

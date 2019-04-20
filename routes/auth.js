@@ -53,7 +53,10 @@ router.get('/:id/:MetaSignature/:nonce', metaAuth, (req, res)=> {
         res.status(200).json({
           status: 'Login successful!',
           success: true,
-          token: token
+          token: token,
+          userName: user.username,
+          userId: user._id
+
         });
       } else {
         console.log('verification failed')

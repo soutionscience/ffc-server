@@ -1,6 +1,6 @@
 const User = require ('../models/users');
 const passport = require('passport');
-const verify = require('./verify')
+// const verify = require('./verify')
 
 let LocalStrategy = require('passport-local').Strategy
 var local= passport.use(new LocalStrategy(User.authenticate()));
