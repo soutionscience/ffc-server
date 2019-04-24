@@ -5,7 +5,7 @@ let verify = require('./verify')
 
 /* GET users listing. */
 router.route('/')
-.get( verify.verifyOrdinaryUser, controller.get)
+.get(controller.get)
 .delete(controller.delete)
 .post(controller.post)
 

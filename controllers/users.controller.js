@@ -70,16 +70,27 @@ exports.delete =(req, res, next)=>{
 exports.postTeam = (req, res, next)=>{
     console.log('is it this two?')
    User.findById(req.params.id, function(err, resp){
-        if(err) throw err;
-        //go through each player from req.body add it to players and save
-        req.body.forEach(element => {
-            resp.players.push(element);
-
-        });
-        resp.save((err, resp)=>{
-            if(err) throw err;
-            res.status(201).json(resp)
-        })
+       console.log('player id' ,req.params.id)
+        if(err) {
+            console.log('error finding user' ,err);
+            res.send({ error: 'Signature verification failed' });
+        }else{
+            if(resp.players){
+                resp.players.length =0;
+            }
+            req.body.forEach(element => {
+                        resp.players.push(element);
+            
+                    });
+                    resp.save((err, resp)=>{
+                        if(err) throw err;
+                        res.status(201).json(resp)
+                    })
+            
+        }
+      
+        
+ 
     })
 }
 
