@@ -8,8 +8,8 @@ router.route('/')
 .post(controller.post)
 .delete(controller.deleteAll)
 
-// router.route('/:etherId')
-// .get(controller.getOne)
+router.route('/:LeagueEtherId/users')
+.post(controller.postUser)
 
 
 module.exports = router;

@@ -20,20 +20,29 @@ exports.get = (req, res, next)=>{
 exports.post= (req,res, next)=>{
   let newLeague = new League(req.body);
   newLeague.save((err, resp)=>{
-    if(err) throw err;
+    if(err){ 
+      res.status(400).send(err)}
+      else{
     res.status(200).send('new League Saved')
-
+      }
   })
 
 }
 
-exports.postCompe = (req, res, next)=>{
-  League.findById(req.params.id, (err, resp)=>{
-    if(err) throw err;
-    resp.competions.push(req.body);
+exports.postUser = (req, res, next)=>{
+  console.log('post user to league ')
+  let query = {etherId: req.params.LeagueEtherId}
+  // console.log('q', query)
+  League.findOne(query, (err, resp)=>{
+    if(err) {
+      res.status(400).send('user not found')
+    };
+    // console.log('what is in resp', resp)
+    resp.users.push(req.body.userId);
+    resp.playerCount+=1;
     resp.save((err, resp)=>{
       if(err) throw err;
-      res.status(201).send('added competion to team')
+      res.status(201).send('added user to league')
     })
 
   })
