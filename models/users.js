@@ -25,8 +25,20 @@ let user = new Schema({
     players:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'player'
-    }]
+    }],
+    teamPoints:{
+        type: Number,
+        default: 0
+    }
 })
+user.methods.getName = function(){
+	return(this.username + ' '+ this.balance)
+};
+user.methods.getPointsTotal = function(){
+    return (this.players.forEach(element => {
+      return element;  
+    }))
+}
 
 user.plugin(passportLocalMongoose)
 module.exports = mongoose.model('user', user)

@@ -11,7 +11,8 @@ var usersRouter = require('./routes/users.routes');
 let playersRouter = require('./routes/player.routes')
 let teamRouter = require('./routes/team.routes');
 let userTeamRouter = require('./routes/users.team.routes');
-let leagueRouter = require('./routes/league.routes')
+let leagueRouter = require('./routes/league.routes');
+let winnerRouter = require('./routes/winner.routes')
 let cors = require('cors');
 let passport = require('passport')
 let User = require('./models/users');
@@ -61,7 +62,7 @@ app.use('/api/teams', teamRouter)
 app.use('/api/user-teams', userTeamRouter)
 app.use('/api/leagues', leagueRouter)
 app.use('/api/auth', auth)
-
+app.use('/api/winner', winnerRouter)
 
 //conect mongoose
 
