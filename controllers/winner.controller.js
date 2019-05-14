@@ -5,22 +5,26 @@ let calculateWinner = require('../scripts/winner.script')
 // finds league and sends all users address found in league to calulateWinner function
 exports.getWinner =(req, res, next)=>{
     // let query = {_: req.body.id}
-    League.findById(req.params.id, (err, resp)=>{  
+ console.log('params ', req.params.id)
+League.findById(req.params.id).populate('users')
+    .exec((err, resp)=>{
         if(err){
-            console.log('user not found');
-            res.status(400).send('user not found')
+            console.log('error finding league')
         }else{
-            resp.users.forEach(element => {
-        calculateWinner.calculate(element);
-          });
-
+    //  console.log('what is in resp ', resp);
+     resp.users.forEach(element => {
+                calculateWinner.calculate(element._id);
+                  });
         }
-        findWinner(resp.users);
-})
+        //findWinner(resp.users)
+    })
 
 }
 function findWinner(users){
-    console.log('users ', users)
-   let sorted= users.sort(function(a, b){return b.teamPoints - a.teamPoints});
-    console.log('users ni ?', sorted)
+for (let i = 0; i < users.length; i++) {
+    const element = users[i];
+    console.log( 'each element ', element.teamPoints)
+    
+}
+  
 }

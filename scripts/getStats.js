@@ -49,7 +49,9 @@ exports.makeRequest =()=>{
                            "pointsWeek": element[i].event_points,
                             "team": element[i].team,
                             "team_code": element[i].team_code,
-                             "position": element[i].element_type}
+                             "position": element[i].element_type
+                    
+                      }
         let newPlayer = new Player(playerData)
         newPlayer.save(function(err, resp){
             if(err) throw err;

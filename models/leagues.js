@@ -24,9 +24,8 @@ let leagues = new Schema({
         default: false},
     users: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'users',
-        unique: true
-    }],
+        ref: 'user' 
+     }],
     active: {
         type: Boolean,
         default: false},

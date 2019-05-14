@@ -5,6 +5,7 @@ let Player = require('../models/players')
 // receives all users (addresses) in a league and.. 
 
 function calculate (users){// calculate rotal
+  console.log('passed users ', users)
 let pointsTotal=0;
 User.findById(users).populate('players')
 .exec(function(err, user){
@@ -13,6 +14,7 @@ User.findById(users).populate('players')
    pointsTotal = pointsTotal + element.pointsWeek;
     
   });
+  console.log('users points total ', pointsTotal)
   user.teamPoints = pointsTotal
   user.save(function(err, resp){
     if (err) console.log('error updating user score')

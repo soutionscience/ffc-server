@@ -1,15 +1,15 @@
 let express = require('express');
 let router = express.Router();
-const controller = require('../controllers/League.controller');
+const controller = require('../controllers/newLeague.controller');
 
 
 router.route('/')
-.get(controller.get)
+ .get(controller.get)
 .post(controller.post)
-.delete(controller.deleteAll)
+ .delete(controller.deleteAll)
 
-router.route('/:LeagueEtherId/users')
-.post(controller.postUser)
+router.route('/:LeagueEtherId/competitions')
+ .post(controller.postCompe)
 
 
 module.exports = router;

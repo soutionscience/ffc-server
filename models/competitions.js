@@ -1,16 +1,20 @@
 const mongoose= require('mongoose');
 const schema = mongoose.Schema;
-const userTeam = require('./userTeams')
+// const userTeam = require('./userTeams')
 
 
 let competition = new schema({
-    users:String,
-    winner: String,
+    etherId: String,
+    name: String,
+    maxPlayers: String,
+    winner: {type: mongoose.Schema.Types.ObjectId,
+        ref: 'user'},
     prizeMoney: Number,
     teams: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'userTeam'
+        ref: 'user'
     }],
+    playerCount: {type: Number, default: 0},
     complete: Boolean
 })
 

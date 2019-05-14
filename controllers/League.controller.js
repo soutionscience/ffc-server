@@ -35,7 +35,7 @@ exports.postUser = (req, res, next)=>{
   // console.log('q', query)
   League.findOne(query, (err, resp)=>{
     if(err) {
-      res.status(400).send('user not found')
+      res.status(400).send('league not found')
     };
     // console.log('what is in resp', resp)
     resp.users.push(req.body.userId);
