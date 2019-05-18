@@ -8,6 +8,9 @@ router.route('/')
 .post(controller.post)
  .delete(controller.deleteAll)
 
+ router.route('/:etherId')
+ .get(controller.getOne)
+
 router.route('/:LeagueEtherId/competitions')
  .post(controller.postCompe)
 

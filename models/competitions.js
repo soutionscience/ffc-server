@@ -15,7 +15,7 @@ let competition = new schema({
         ref: 'user'
     }],
     playerCount: {type: Number, default: 0},
-    complete: Boolean
+    complete: {type: Boolean, default: false}
 })
 
 module.exports = mongoose.model('competition', competition)

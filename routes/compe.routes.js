@@ -8,6 +8,9 @@ router.route('/')
 .post(controller.post)
 .delete(controller.deleteAll)
 
+router.route('/:id')
+.get(controller.getOne)
+
 
 router.route('/:compeId/teams')
  .post(controller.postUser)

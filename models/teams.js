@@ -23,4 +23,4 @@ let team = new Schema({
 
 })
 
-module.exports = mongoose.model('team', team)
+module.exports = mongoose.model('teams', team)

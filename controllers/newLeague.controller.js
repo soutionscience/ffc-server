@@ -63,3 +63,18 @@ exports.deleteAll= (req, res, next)=>{
     })
 
   }
+
+  exports.getOne= (req, res, next)=>{
+    // console.log('hitting get ', req.params.etherId)
+  let query = {etherId: req.params.etherId}
+  // League.find(query, (err, resp)=>{
+  //   if(err) throw err;
+  //  res.status(200).json(resp);
+  // })
+  League.findOne(query)
+  .populate('competitions')
+  .exec((err, resp)=>{
+    if(err) throw err;
+    res.status(200).json(resp)
+  })
+  }

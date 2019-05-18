@@ -4,7 +4,7 @@ const controller = require('../controllers/winner.controller.js');
 
 
 router.route('/:id')
-.post(controller.getWinner)
+.get(controller.getWinner)
 
 
 

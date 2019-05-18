@@ -7,7 +7,7 @@ let league = new Schema({
     etherId: {type: String},
     desc: String,
     competitions: [{
-        type: mongoose.Schema.Types.ObjectId, ref: 'competitions'
+        type: mongoose.Schema.Types.ObjectId, ref: 'competition'
     }],
     active:{
         type: Boolean,
