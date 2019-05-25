@@ -55,7 +55,8 @@ router.get('/:id/:MetaSignature/:nonce', metaAuth, (req, res)=> {
           success: true,
           token: token,
           userName: user.username,
-          userId: user._id
+          userId: user._id,
+          address: user.address
 
         });
       } else {

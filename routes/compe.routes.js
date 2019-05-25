@@ -15,5 +15,8 @@ router.route('/:id')
 router.route('/:compeId/teams')
  .post(controller.postUser)
 
+ router.route('/:compeId/winner')
+ .post(controller.postWinner)
+
 
 module.exports = router;

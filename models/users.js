@@ -13,7 +13,7 @@ let user = new Schema({
        
       },
     username: String,
-    balance: String,
+    balance: {type: Number, default: 0},
     address: String,
     OauthId: String,
     OauthToken: String,

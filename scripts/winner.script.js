@@ -25,24 +25,24 @@ User.findById(users).populate('players')
 
 }
 
-async function  getPointsWeek(p){
-  let mypoints =0;
-   await  Player.findById(p, (err, resp)=>{
-    if(err) console.log('error finding player');
-   mypoints = resp.pointsWeek;
-    console.log('points week ', mypoints)
+// async function  getPointsWeek(p){
+//   let mypoints =0;
+//    await  Player.findById(p, (err, resp)=>{
+//     if(err) console.log('error finding player');
+//    mypoints = resp.pointsWeek;
+//     console.log('points week ', mypoints)
    
-  })
-  return mypoints;
+//   })
+//   return mypoints;
 
  
 
-  }
-  async function test(me, userPoints){
-    let  points = await getPointsWeek( me);
-     userPoints =userPoints + points;
-    // console.log('total points ', userPoints)
-    return userPoints;
+//   }
+//   async function test(me, userPoints){
+//     let  points = await getPointsWeek( me);
+//      userPoints =userPoints + points;
+//     // console.log('total points ', userPoints)
+//     return userPoints;
    
-  }
+//   }
 module.exports.calculate = calculate;

@@ -62,6 +62,7 @@ exports.deleteAll= (req, res, next)=>{
         console.log('competitions with id: ', req.params.compeId,   'not found ', );
         res.status(400).send('compe not found')
       }else{
+        
         resp.teams.push(req.body.userId)
         resp.playerCount+=1
         resp.save((err, resp)=>{
@@ -77,4 +78,21 @@ exports.deleteAll= (req, res, next)=>{
     })
     // console.log('q', query)
 
+  }
+  exports.postWinner = (req,res, next)=>{
+    Compe.findById(req.params.compeId)
+    .exec((err, resp)=>{
+      if(err){
+        console.log('err finding compe')
+        res.status(400).send({"err": "error finding compe"})
+      }
+      else{
+        resp.winner=req.body.winner;
+        resp.complete= true;
+        resp.save((err, resp)=>{
+          if(err) res.status(400).send({"error": "error adding winner to compe"});
+          res.status(200).json(resp)
+        })
+      }
+    })
   }

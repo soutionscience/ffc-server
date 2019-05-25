@@ -95,20 +95,18 @@ exports.postTeam = (req, res, next)=>{
 }
 
 exports.getUser = (req, res, next)=>{
-    console.log('get single user', req.params.id);
+    console.log('get single user reached', req.params.id);
     let myAddress = req.params.id
-    let query = {address: myAddress}
-    User.findOne(query, (err, resp)=>{
-        if(!resp) {
-         
-           return res.status(400).send({
-                error: 'User not found'
-             });
-        }
-        else{
-            
-        res.status(200).json(resp)
-
+    let query = {address: req.params.id}
+    User.findOne(query)
+    .populate('players')
+    .exec((err, resp)=>{
+        if(!resp){
+            console.log('error finding user')
+            res.status(400).send({"error":"could not find user"})
+        }else{
+            console.log('user found ')
+            res.status(200).json(resp)
         }
     })
 
