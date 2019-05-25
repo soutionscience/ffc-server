@@ -14,6 +14,7 @@ router.route('/:id')
 
 router.route('/:compeId/teams')
  .post(controller.postUser)
+ .get(controller.getTeams)
 
  router.route('/:compeId/winner')
  .post(controller.postWinner)

@@ -1,4 +1,5 @@
 let Compe= require('../models/competitions');
+let sortJsonArray = require('sort-json-array');
 
 exports.post = (req, res, next)=>{
   console.log('are you posting competitions?')
@@ -36,16 +37,35 @@ exports.getOne=(req, res, next)=>{
   Compe.findOne(query)
   .populate('teams')
   .exec((err, resp)=>{
-    if(err){
+    if(!resp){
       res.status(400).send('error geting compe')
     }else{
+      console.log('getting responce ', resp.teams)
+     //const newjson = json.parse(res.teams);
+      // const jsonAsArray = Object.keys(res).map(function (key) {
+      //   return res[key];
+      // }).sort
+      // console.log('converted to json? ', jsonAsArray)
       res.status(200).json(resp)
     }
   })
 
 }
 
+exports.getTeams=(req, res, next)=>{
+  let query = {_id: req.params.compeId}
+  console.log('hitting get compe teams ', req.params.id)
+  Compe.findOne(query)
+  .populate('teams')
+  .exec((err, resp)=>{
+    if(!resp){
+      res.status(400).send('error geting compe')
+    }else{
+   res.status(200).json(sortJsonArray(resp.teams, 'teamPoints', 'des'))
+    }
+  })
 
+}
 exports.deleteAll= (req, res, next)=>{
     console.log('hitting delete');
     Compe.deleteMany({}, (err, resp)=>{

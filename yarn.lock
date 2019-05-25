@@ -4441,6 +4441,11 @@ socks@~2.3.2:
     ip "^1.1.5"
     smart-buffer "4.0.2"
 
+sort-json-array@^0.1.7:
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/sort-json-array/-/sort-json-array-0.1.7.tgz#993a5aa05e482740975f2990515300e4dacd639a"
+  integrity sha1-mTpaoF5IJ0CXXymQUVMA5NrNY5o=
+
 sorted-object@~2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/sorted-object/-/sorted-object-2.0.1.tgz#7d631f4bd3a798a24af1dffcfbfe83337a5df5fc"
