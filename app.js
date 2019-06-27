@@ -76,12 +76,12 @@ mongoose.connect(process.env.localDb,  { useNewUrlParser: true }, function(err, 
 })
 
 //make api request
-//getData.makeRequest();  //get new player data
+getData.makeRequest();  //get new player data
 //getValues.getNew()
 //newValues.getnew();
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+  next(createError(404))
 });
 
 // error handler

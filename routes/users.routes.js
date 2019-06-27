@@ -23,6 +23,9 @@ router.route('/:id')
 router.route('/:id/players')
 .post(controller.postTeam)
 
+router.route('/:id/coins')
+.post(controller.awardCoins)
+
 
 
 module.exports = router;

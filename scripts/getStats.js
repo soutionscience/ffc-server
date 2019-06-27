@@ -44,7 +44,7 @@ exports.makeRequest =()=>{
                           "second_name": element[i].second_name,
                            "squad_number": element[i].squad_number,
                            "player_code": element[i].code,
-                           "now_cost": element[i].now_cost,
+                           "now_cost": (Math.ceil(element[i].now_cost/6)),
                            "pointsTotal":element[i].total_points,
                            "pointsWeek": element[i].event_points,
                             "team": element[i].team,

@@ -29,7 +29,11 @@ let user = new Schema({
     teamPoints:{
         type: Number,
         default: 0
-    }
+    },
+    competitions:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'competition'
+    }]
 })
 user.methods.getName = function(){
 	return(this.username + ' '+ this.balance)

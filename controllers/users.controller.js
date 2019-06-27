@@ -93,6 +93,25 @@ exports.postTeam = (req, res, next)=>{
  
     })
 }
+exports.awardCoins= (req, res, next)=>{
+    console.log('award coins ',)
+    let myAddress = req.params.id
+    let query = {address: req.params.id}
+    User.findOne(query)
+    .exec((err, resp)=>{
+        if(!resp){
+            console.log('error finding user')
+            res.status(400).send({"error":"could not find user"})
+
+        }else{
+         resp.balance = req.body.amount
+         resp.save((err, resp)=>{
+             if(err) resp.status(500).send({"error": 'could not save user with new balance'})
+             res.status(200).json(resp)
+         })
+        }
+    })
+}
 
 exports.getUser = (req, res, next)=>{
     console.log('get single user reached', req.params.id);

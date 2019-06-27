@@ -1,5 +1,6 @@
 let Compe= require('../models/competitions');
 let sortJsonArray = require('sort-json-array');
+let User = require('../models/users')
 
 exports.post = (req, res, next)=>{
   console.log('are you posting competitions?')
@@ -54,7 +55,7 @@ exports.getOne=(req, res, next)=>{
 
 exports.getTeams=(req, res, next)=>{
   let query = {_id: req.params.compeId}
-  console.log('hitting get compe teams ', req.params.id)
+  console.log('hitting get compe teams ', req.params.compeId)
   Compe.findOne(query)
   .populate('teams')
   .exec((err, resp)=>{
@@ -77,21 +78,34 @@ exports.deleteAll= (req, res, next)=>{
   exports.postUser=(req, res,next)=>{
     console.log('hitting post user ', req.params.compeId);
     let query = {etherId: req.params.compeId}
-    Compe.findOne(query, (err, resp)=>{
+    Compe.findOne(query, (err, compe)=>{
       if(err){
         console.log('competitions with id: ', req.params.compeId,   'not found ', );
         res.status(400).send('compe not found')
       }else{
         
-        resp.teams.push(req.body.userId)
-        resp.playerCount+=1
-        resp.save((err, resp)=>{
+        compe.teams.push(req.body.userId)
+        compe.playerCount+=1
+        compe.save((err, resp)=>{
           if(err){
             console.log('user not added to competitions')
             res.status(400).send('user not added to competition')
           }else{
             console.log('user added to compe!!!');
-            res.status(200).send(resp)
+            User.findById(req.body.userId)
+            .exec((err, user)=>{
+              if(!user){
+                console.log('error finding user for cross posting')
+                res.status(400).send({'error':'error finding user for cross posting'})
+              }else{
+                user.competitions.push(compe._id)
+                user.save((err, resp)=>{
+                  if(!resp)      res.status(400).send({'error':'saving user after cross posting'})
+                  res.status(200).send(resp)
+                })
+              }
+            })
+            // res.status(200).send(resp)
           }
         })
       }
@@ -115,4 +129,9 @@ exports.deleteAll= (req, res, next)=>{
         })
       }
     })
+  }
+
+  exports.findUserCompetitions= (req, res, next)=>{
+    console.log('hitting find user')
+
   }
