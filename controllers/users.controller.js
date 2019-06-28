@@ -94,10 +94,10 @@ exports.postTeam = (req, res, next)=>{
     })
 }
 exports.awardCoins= (req, res, next)=>{
-    console.log('award coins ',)
+    console.log('award coins ')
     let myAddress = req.params.id
     let query = {address: req.params.id}
-    User.findOne(query)
+    User.findById(req.params.id)
     .exec((err, resp)=>{
         if(!resp){
             console.log('error finding user')
@@ -105,6 +105,7 @@ exports.awardCoins= (req, res, next)=>{
 
         }else{
          resp.balance = req.body.amount
+         console.log('changed balance to ', resp.balance)
          resp.save((err, resp)=>{
              if(err) resp.status(500).send({"error": 'could not save user with new balance'})
              res.status(200).json(resp)
