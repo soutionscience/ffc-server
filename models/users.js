@@ -18,6 +18,7 @@ let user = new Schema({
     OauthId: String,
     OauthToken: String,
     email: String,
+    teamValue:{type: Number, default: 0},
     admin:   {
         type: Boolean,
         default: false

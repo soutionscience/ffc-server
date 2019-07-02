@@ -20,7 +20,7 @@ exports.get = (req, res, next)=>{
     .populate('teams')
     .exec((err,resp)=>{
       if(err) throw err;
-      console.log('compe ', resp)
+      //console.log('compe ', resp)
       res.status(200).json(resp)
     })
   //}
@@ -41,7 +41,7 @@ exports.getOne=(req, res, next)=>{
     if(!resp){
       res.status(400).send('error geting compe')
     }else{
-      console.log('getting responce ', resp.teams)
+      // console.log('getting responce ', resp.teams)
      //const newjson = json.parse(res.teams);
       // const jsonAsArray = Object.keys(res).map(function (key) {
       //   return res[key];

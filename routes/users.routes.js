@@ -22,6 +22,7 @@ router.route('/:id')
 
 router.route('/:id/players')
 .post(controller.postTeam)
+.get(controller.getUserPlayers)
 
 router.route('/:id/coins')
 .post(controller.awardCoins)

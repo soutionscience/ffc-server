@@ -1,5 +1,6 @@
 let Feedback = require('../models/feedback.model');
 let User = require('../models/users');
+const request = require('request')
 
 
 exports.post = (req, res, next)=>{
@@ -27,4 +28,11 @@ exports.get = (req, res, next)=>{
 }
 exports.getOne = (req, res, next)=>{
     console.log('you are hitting post one compe')
+    request.post('http://localhost:3000/api/messages', 
+        {form:{ mes: "heydude" }},
+      (err, resp)=>{
+          if(err){
+              console.log('error in feedback')
+          }
+      })
 }

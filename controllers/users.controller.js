@@ -131,3 +131,21 @@ exports.getUser = (req, res, next)=>{
     })
 
 }
+
+exports.getUserPlayers= (req, res, next)=>{
+    console.log('get single user reached', req.params.id);
+    let myAddress = req.params.id
+    let query = {address: req.params.id}
+    User.findOne(query)
+    .populate('players')
+    .exec((err, resp)=>{
+        if(!resp){
+            console.log('error finding user')
+            res.status(400).send({"error":"could not find user"})
+        }else{
+            console.log('user found ')
+            res.status(200).json(resp.players)
+        }
+    })
+
+}

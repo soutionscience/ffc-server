@@ -15,6 +15,7 @@ let leagueRouter = require('./routes/league.routes');
 let winnerRouter = require('./routes/winner.routes');
 let compeRouter = require('./routes/compe.routes')
 let feedbackRouter = require('./routes/feedback.routes')
+let messageRouter = require('./routes/message.router')
 
 
 let cors = require('cors');
@@ -69,7 +70,8 @@ app.use('/api/leagues', leagueRouter)
 app.use('/api/auth', auth)
 app.use('/api/winner', winnerRouter);
 app.use('/api/competitions', compeRouter);
-app.use('/api/feedback', feedbackRouter)
+app.use('/api/feedback', feedbackRouter);
+app.use('/api/messages' , messageRouter)
 
 
 //conect mongoose
